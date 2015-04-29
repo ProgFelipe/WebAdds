@@ -8,8 +8,8 @@ http://activemq.apache.org/
 #### Register
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/Register.PNG)
 #### Main page
-![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/InChannel.PNG)
+![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/main.PNG)
 #### Channel creator
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/channelCreator.PNG)
 #### In Subscribed Channel comment
-![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/main.PNG)
+![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/InChannel.PNG)
