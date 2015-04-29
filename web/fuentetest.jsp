@@ -25,6 +25,7 @@
     $(document).ready(
        function(){
         var amq = org.activemq.Amq;
+        $("<p>Mensajes:</p>").appendTo(".event-list");
         amq.init({ 
             uri: 'AdCliente?channelName=Ciencia&username=felipe', 
             logging: true,
@@ -35,7 +36,7 @@
   rcvMessage: function(message)
   {  
       var msg_data="<li>"+message+"</li>";
-       $(msg_data).appendTo(".event-list");
+      $(msg_data).appendTo(".event-list");
      alert("received "+message);
   }
     };
@@ -44,8 +45,8 @@
   var myDestination='AdCliente?channelName=Ciencia&username=felipe';
   var myMessage = '<message>Ciencia Sains!</message>';
   var myId = 'felipe';
-    //amq.addListener(myId,myDestination,myHandler.rcvMessage);
-    amq.addListener(myId,myDestination,function(message){alert(message);});
+    amq.addListener(myId,myDestination,myHandler.rcvMessage);
+    //amq.addListener(myId,myDestination,function(message){alert(message);});
     /*try {
   amq.sendMessage(myDestination, myMessage);
   } catch (err) {
@@ -54,47 +55,6 @@
        }
                );
        </script>
-       <script type='text/javascript'>
-/*$(document).ready(function(){
-//setInterval(function() {
-   //if(currentUser != null){
-   
-$.ajax
-({
-type: "GET",
-url: "AdCliente?username=felipe&channelName=Ciencia",
-dataType:"json",
-success: function(data)
-{
-    console.log(data.length);
-if(data.length)
-{
-    
-    $( ".event-list" ).empty();
-$.each(data, function(i,data)
-{
-    console.log(data.Message);
-var msg_data="<li>"+data.Message+"</li>"
-
-$(msg_data).appendTo(".event-list");
-});
-}
-else
-{
-$(".event-list").html("No Subscriptions");
-}
-}
-});
-$('#UpdateButton').click(function() 
-{
-// Previous Post
-});
-return false;
-  // }else{ }
-  //}, 5000); //5 seconds   
-});
- */
-</script>    
 <script type="text/javascript">
     function cliente(){
     $.get("AdCliente?username=felipe&channelName=Ciencia", function(data){
@@ -125,7 +85,7 @@ return false;
     </div>
 </form>
     <div class="container">
-    <ul class="event-list">
+    <ul class="event-list" id="event-list">
     </ul>
     </div>
 </div>
