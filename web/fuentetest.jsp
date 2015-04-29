@@ -15,6 +15,13 @@
         <script><%@include file="js/amq_jquery_adapter.js" %></script>
         <script><%@include file="js/amq.js" %></script>
         <script type="text/javascript">
+            /*
+             * 
+             * @type String
+             * Tomado de: http://activemq.apache.org/ajax.html
+             * js: https://code.google.com/p/cxldemo/source/browse/trunk/activemq/src/main/webapp/js/amq_jquery_adapter.js?r=1376
+             * https://svn.apache.org/repos/asf/activemq/trunk/activemq-web-demo/src/main/webapp/js/amq.js
+             */
     $(document).ready(
        function(){
         var amq = org.activemq.Amq;
@@ -34,7 +41,7 @@
     };
  
  //var myDestination='queue://com.broadworks.dms.client';
-  var myDestination='AdFuente';
+  var myDestination='AdCliente?channelName=Ciencia&username=felipe';
   var myMessage = '<message>Ciencia Sains!</message>';
   var myId = 'felipe';
     //amq.addListener(myId,myDestination,myHandler.rcvMessage);
