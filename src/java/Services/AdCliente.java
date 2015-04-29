@@ -29,8 +29,10 @@ public class AdCliente  extends HttpServlet implements ExceptionListener {
   //Pide los mensajes
  public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			           throws ServletException, java.io.IOException {
+          String username = request.getParameter("username");
           String channelName = request.getParameter("channelName");
-        System.err.println("DO GET AdCliente CH "+channelName);            
+          System.err.println("DO GET AdCliente UserName "+username);            
+          System.err.println("DO GET AdCliente CH "+channelName);      
             PrintWriter out = response.getWriter();
             /*JSONArray jArray = new JSONArray();
             JSONObject obj = new JSONObject();
@@ -39,12 +41,10 @@ public class AdCliente  extends HttpServlet implements ExceptionListener {
             String messages = jArray.toJSONString();
             */
             String messages = "<p>The servlet has received a GET. This is the reply.</p>";
-            response.setContentType("text/xml");
-            response.setHeader(messages, messages);
+            response.setHeader("Content-Type","text");
             //System.out.println("{\"Messages\":"+messages+"}");
             out.println(messages);
-            out.close();
-                    
+            out.close();                  
  }
 //Crea el Cliente o consumidor
 public void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -53,7 +53,6 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
             String channelName = request.getParameter("channelName");
             String username = request.getParameter("username");
             AdCliente c = new AdCliente();
-            System.out.println("Running Consumer...");
             System.out.println("Do Post "+username+", "+channelName);
             c.processConsumer(channelName, username);    
         }
@@ -82,6 +81,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
             //MessageConsumer consumer = session.createConsumer(destination);
             MessageConsumer consumer = session.createDurableSubscriber((Topic) destination, username);
             //consumer.setMessageListener(listener);
+            System.out.println("Running Consumer...");
             connection.start();
 
 	    // Wait for a message
