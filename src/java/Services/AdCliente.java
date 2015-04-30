@@ -2,6 +2,8 @@ package Services;
 
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
@@ -25,26 +27,32 @@ import org.json.simple.JSONObject;
 
 @WebServlet("/AdCliente")
 public class AdCliente  extends HttpServlet implements ExceptionListener {
-    
+    ArrayList Mensajes;
   //Pide los mensajes
  public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			           throws ServletException, java.io.IOException {
           String username = request.getParameter("username");
           String channelName = request.getParameter("channelName");
-          System.err.println("DO GET AdCliente UserName "+username);            
-          System.err.println("DO GET AdCliente CH "+channelName);      
-            PrintWriter out = response.getWriter();
-            /*JSONArray jArray = new JSONArray();
+          //System.err.println("DO GET AdCliente UserName "+username);            
+          //System.err.println("DO GET AdCliente CH "+channelName);      
+            
+            JSONArray jArray = new JSONArray();
             JSONObject obj = new JSONObject();
-            obj.put("message", "<p>The servlet has received a GET. This is the reply.</p>");
+            for(int c = 0; c < Mensajes.size(); c++){
+                obj.put("Message", Mensajes.get(c));
+            }
+            obj.put("Message", "The servlet has received a GET. This is the reply.");
             jArray.add(0,obj);
             String messages = jArray.toJSONString();
-            */
-            String messages = "<p>The servlet has received a GET. This is the reply.</p>";
-            response.setHeader("Content-Type","text");
-            //System.out.println("{\"Messages\":"+messages+"}");
-            out.println(messages);
-            out.close();                  
+            System.out.println(messages);
+            //String messages = "<p>The servlet has received a GET. This is the reply.</p>";
+            //response.setHeader(messages, messages);
+            PrintWriter out = response.getWriter();
+            out.print(messages);
+            out.close();
+            
+            //out.print("<ajax-response> respuesta </ajax-response>");
+            //out.close();                  
  }
 //Crea el Cliente o consumidor
 public void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -53,6 +61,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
             String channelName = request.getParameter("channelName");
             String username = request.getParameter("username");
             AdCliente c = new AdCliente();
+            Mensajes = new ArrayList();
             System.out.println("Do Post "+username+", "+channelName);
             c.processConsumer(channelName, username);    
         }
@@ -85,7 +94,7 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
             connection.start();
 
 	    // Wait for a message
-            /*Message message = consumer.receive(1000);
+            Message message = consumer.receive(1000);
             
              while (message != null) {
              Thread.sleep(5000);
@@ -95,20 +104,21 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
              TextMessage textMessage = (TextMessage) message;
              String text = textMessage.getText();
              System.out.println("Received: " + text);
+             Mensajes.add(text);
              
              } else {
              System.out.println("Received: " + message);
-             
+             Mensajes.add(message);
              }
              message = consumer.receiveNoWait();
              }
             
             //System.out.println("{\"Messages\":"+messages+"}");
             
-             consumer.close();
-             session.close();
-             connection.close();
-                          */
+             //consumer.close();
+             //session.close();
+             //connection.close();
+                         
         } catch (Exception e) {
             System.out.println("Caught: " + e);
             e.printStackTrace();
