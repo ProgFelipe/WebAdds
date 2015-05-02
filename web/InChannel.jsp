@@ -4,6 +4,7 @@
     Author     : Felipe
 --%>
 
+<%@page import="Bean.UserBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,53 @@
         <script><%@include file="js/bootstrap.min.js" %></script>
         <%String channel = request.getParameter("channel");%>
         <title><%=channel%></title>
+        <script type='text/javascript'>
+$(document).ready(function()
+{
+     <% UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));%>
+    var currentUser = "<%out.print(currentUser.getUsername());%>";
+    <%String place = request.getParameter("place");%>
+   if(currentUser != null){
+$.ajax
+({
+type: "GET",
+url: "GetJSON?username="+currentUser+"&&channel=<%=channel%>",
+dataType:"json",
+success: function(data)
+{
+if(data.length)
+{
+    $( ".event-list" ).empty();
+$.each(data, function(i,data)
+{
+    var fecha = data.date;
+    var dateParts = fecha.split(' ');
+    dateParts = dateParts[0].split('-');
+var msg_data="<li class='media'><div class='media-body'><div class='well well-lg'>\n\
+<h4 class='media-heading text-uppercase reviews'>"+data.idauthor+"</h4>\n\
+<ul class='media-date text-uppercase reviews list-inline'>\n\
+    <li class='dd'>"+dateParts[2]+
+    "</li><li class='mm'>"+dateParts[1]+"</li>\n\
+    <li class='aaaa'>"+dateParts[0]+"</li></ul>\n\
+<p class='media-comment'>"+data.message+"</p>\n\
+<img style='width: 300px; height: auto;' src='"+data.urlMedia+"'/></div></div></li>";
+$(msg_data).appendTo(".media-list");
+});
+}
+else
+{
+$(".event-list").html("No Subscriptions");
+}
+}
+});
+$('#UpdateButton').click(function() 
+{
+// Previous Post
+});
+return false;
+   }else{ }
+});
+</script>
     </head>
     <body>
         <div class="container-fluid" style="margin-top: -52px;">    
@@ -64,9 +112,6 @@
 <!-- End Toolbar -->  
         <div class="container">
             <div class="row">
-                ${requestScope.message}
-            </div>
-            <div class="row">
                 <a href="DeletSubscription?channel=<%=channel%>" style="width: 100%; margin-bottom: 20px;" >
                 <div class="alert alert-danger"><strong>Delete </strong>subscription!</div>
                 </a>
@@ -88,8 +133,14 @@
                 <li><a href="#account-settings" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Account settings</h4></a></li>
             </ul>            
             <div class="tab-content">
-                <div class="tab-pane active" id="comments-logout">                
-                    <!--<ul class="media-list">
+                <div class="tab-pane active" id="comments-logout">      
+                                <div class="row">
+                <ul class="media-list">
+                </ul>
+            </div>
+                    <!--
+            
+                    <ul class="media-list">
                       <li class="media">
                         <div class="media-body">
                           <div class="well well-lg">
@@ -199,10 +250,12 @@
                             </ul>  
                         </div>
                       </li>
-                    </ul> -->
+                    </ul>
+                    
+                    -->
                 </div>
                 <div class="tab-pane" id="add-comment">
-                    <form action="AdFuente" class="form-horizontal" id="commentForm" role="form"> 
+                    <form action="addMessage" class="form-horizontal" id="commentForm" role="form"> 
                         <div class="form-group">
                             <label for="Message" class="col-sm-2 control-label">Comment</label>
                             <div class="col-sm-10">

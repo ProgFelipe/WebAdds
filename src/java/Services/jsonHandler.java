@@ -10,7 +10,9 @@ package Services;
  * @author Felipe
  */
 import Bean.CanalBean;
+import Bean.MessageBean;
 import DAO.CanalDAO;
+import DAO.MessagesDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -31,12 +33,20 @@ public jsonHandler() {
 super();
 }
 
+@SuppressWarnings("empty-statement")
 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 response.setContentType("text/html;charset=UTF-8");
 String username = request.getParameter("username");
 String place = request.getParameter("place");
-    System.err.println("username "+username+" place "+place);
+String channel = request.getParameter("channel");
+    System.err.println("username "+username+" place "+place+" channel "+channel);
 PrintWriter out = response.getWriter();
+if(place != null){
+    getChannels(place, username, out);};
+if(channel != null){getMessages(channel, out);};
+}
+
+public void getChannels(String place, String username, PrintWriter out){
 try
 {
 if(place.equalsIgnoreCase("MyChannels")){
@@ -93,6 +103,36 @@ String messages = jArray.toJSONString();
 //System.out.println("{\"Messages\":"+messages+"}");
 out.println(messages);    
 }
+}
+catch (Exception ex)
+{
+out.println("Error: " + ex.getMessage());
+}
+finally
+{
+out.close();
+}
+}
+public void getMessages(String channel, PrintWriter out){    
+try
+{
+
+ArrayList<MessageBean> messagesData = null;
+messagesData = MessagesDAO.getMessages(channel);
+JSONArray jArray = new JSONArray();
+    for(int c = 0; c< messagesData.size(); c++){
+      JSONObject obj = new JSONObject();
+      obj.put("idMessage", messagesData.get(c).getId());
+      obj.put("idauthor", messagesData.get(c).getAutor());
+      obj.put("idchannel", messagesData.get(c).getChannel());
+      obj.put("message", messagesData.get(c).getMessage());
+      obj.put("urlMedia", messagesData.get(c).getUrl());
+      obj.put("date", messagesData.get(c).getFecha());
+      jArray.add(c,obj);
+    }    
+String messages = jArray.toJSONString();
+System.out.println(messages);
+out.println(messages);    
 }
 catch (Exception ex)
 {

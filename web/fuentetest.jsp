@@ -26,10 +26,10 @@
        function(){
            var amq = org.activemq.Amq;
         amq.init({ 
-            uri: 'AdCliente?channelName=Ciencia&username=sergio', 
+            //uri: 'AdCliente?channelName=Ciencia&username=sergio', 
             //uri: 'http://localhost:8161/amq',
             //uri: 'tcp://127.0.0.1:52125',
-            //uri: 'amq',
+            uri: 'amq',
             logging: true,
             timeout: 20
            });
@@ -51,7 +51,7 @@
     };
     console.log("Lets create a listener");
      //amq.addListener(myId,myDestination,myHandler.rcvMessage,{Selector: "identificador = 'TEST'" });
-    amq.addListener(myId,myDestination,myHandler.rcvMessage,  { selector: "property-name='property-value'" });
+    amq.addListener(myId,myDestination,myHandler.rcvMessage);
     console.log("Lets add a message");
     amq.sendMessage(myDestination, myMessage);
     
