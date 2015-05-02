@@ -154,7 +154,7 @@ public class CanalDAO {
          Statement stmt = null;
          boolean usuarioSuscrito = false;
          
-         String searchQuery = "select * from t_users where username='" + user.getSuscriptor()+ "'";
+         String searchQuery = "select id_usuario from t_users where username='" + user.getSuscriptor()+ "'";
          String searchQuery2 = "select * from t_canales where nombre='" + user.getCanal()+ "'";
 
          try 
@@ -221,6 +221,5 @@ public class CanalDAO {
          System.out.println("UnSubsribed fail: An Exception has occurred! " + ex);
       } 
          return usuarioDesInscrito;
-   
    }
 }
