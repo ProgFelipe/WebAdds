@@ -5,8 +5,11 @@
  */
 package Services;
 
+import Bean.CanalBean;
 import Bean.UserBean;
+import DAO.CanalDAO;
 import DAO.UserDAO;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,9 +31,15 @@ public class UnRegister extends HttpServlet{
         try{
         HttpSession s=request.getSession();
                 UserBean currentUser = (UserBean) (s.getAttribute("currentSessionUser"));
-        boolean unregister = UserDAO.UnRegister(currentUser);
+        ArrayList<CanalBean> channels = null;
+        channels = CanalDAO.getCanalsDataByAuthor(currentUser.getUsername());
+        for(int c = 0; c< channels.size(); c++){
+            CanalDAO.deletAllmesasages(channels.get(c).getNombre());
+            CanalDAO.deletAllsubscribers(channels.get(c).getNombre());
+            CanalDAO.deletChannel(channels.get(c).getNombre());
+        }
+        boolean unregister = UserDAO.deletUser(currentUser);
         if(unregister){
-                    
         HttpSession session = request.getSession(false);
         if(session != null){
         session.invalidate();}

@@ -218,8 +218,26 @@ return bean;
             }
             return user;
         }
-        public static boolean UnRegister(UserBean bean ){
-            boolean unregister = false;
-            return unregister;
-        }
+        public static boolean deletUser(UserBean user){
+      //preparing some objects for connection 
+         Statement stmt = null;
+         boolean usuarioEliminado = false;
+         try {
+         //connect to DB 
+             //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+          String deletQuery = "DELETE FROM t_users WHERE username = '"+user.getUsername()+"'";
+          System.out.println("Delete User "+deletQuery);
+             //register User
+             int r = stmt.executeUpdate(deletQuery);
+             if(r == 1){usuarioEliminado = true;}
+      } 
+      catch (Exception ex) 
+      {
+         System.out.println("UnSubscribed fail: An Exception has occurred! " + ex);
+      } 
+         return usuarioEliminado;
+   }
+        
    }
