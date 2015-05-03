@@ -48,7 +48,7 @@ public class UserRegister extends HttpServlet{
                 if (register){        
                   HttpSession session = request.getSession(true);	    
                   session.setAttribute("currentSessionUser",user); 
-                  response.sendRedirect("myChannels.jsp"); //logged-in page      		
+                  response.sendRedirect("manager.jsp?place=MyChannels"); //logged-in page      		
                 }else{ 
                       request.setAttribute("message", "<div class=\"alert alert-danger alert-error\">\n" +
 "            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Register Error!</strong> Check data or Change user</div>");
