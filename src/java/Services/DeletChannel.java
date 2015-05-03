@@ -19,8 +19,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Felipe
  */
-@WebServlet("/DeletSubscription")
-public class DeletSubscription  extends HttpServlet{
+@WebServlet("/DeletChannel")
+public class DeletChannel  extends HttpServlet{
     
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
 			           throws ServletException, java.io.IOException {
@@ -39,8 +39,10 @@ public class DeletSubscription  extends HttpServlet{
             SuscriptorBean user = new SuscriptorBean();
             user.setCanal(channel);
             user.setSuscriptor(suscriptor);
-            boolean unsubscribe = CanalDAO.Unsubscribe(user);
-                if (unsubscribe){        
+                CanalDAO.deletAllmesasages(channel);
+                CanalDAO.deletAllsubscribers(channel);
+                boolean deletedChannel = CanalDAO.deletChannel(channel);
+                if (deletedChannel){        
                   response.sendRedirect("manager.jsp?place=Suscriptions"); //logged-in page      		
                 }else{ 
                       request.setAttribute("message", "<div class=\"alert alert-danger alert-error\">\n" +

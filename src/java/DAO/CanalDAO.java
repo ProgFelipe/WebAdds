@@ -33,13 +33,14 @@ public class CanalDAO {
          //connect to DB 
          currentCon = ConnectionManager.getConnection();
          stmt=currentCon.createStatement();
+          System.out.println("Create canal "+registerQuery);
          rs = stmt.executeQuery(searchQuery);
          boolean more = rs.next();
          System.out.println("**¨*¨*¨*¨*Channel existente ? "+ more);
          if(more){
-             //User exist
+             //Channel exist
          }else{
-             //register User
+             //Channel User
              canalRegistrado = true;
              stmt.executeUpdate(registerQuery);
          }
@@ -186,39 +187,145 @@ public class CanalDAO {
       } 
          return usuarioSuscrito;
     }
-   public static boolean Unsubsribe(SuscriptorBean user){
+   public static boolean Unsubscribe(SuscriptorBean user){
         //preparing some objects for connection 
          Statement stmt = null;
          boolean usuarioDesInscrito = false;
-         
-         String searchQuery = "select * from t_users where username='" + user.getSuscriptor()+ "'";
-         String searchQuery2 = "select * from t_canales where nombre='" + user.getCanal()+ "'";
-
+         try {
+         //connect to DB 
+             //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+         String idUsuario = getIdSubscriptor(user);
+         String idCanal = getIdCanal(user.getCanal());
+          System.out.println("Canalid = "+idCanal+" Usuario "+idUsuario);
+          String registerQuery = "DELETE FROM t_suscriptores WHERE idcanal = '"+idCanal+"' and idsuscriptor='"+idUsuario+"'";
+          System.out.println("Unsubscribe "+registerQuery);
+             //register User
+             int r = stmt.executeUpdate(registerQuery);
+             if(r == 1){usuarioDesInscrito = true;}
+      } 
+      catch (Exception ex) 
+      {
+         System.out.println("UnSubscribed fail: An Exception has occurred! " + ex);
+      } 
+         return usuarioDesInscrito;
+   }
+   public static int setMail(SuscriptorBean user, String mailme){
+       //preparing some objects for connection 
+         Statement stmt = null;
+         int r = 0;
+       String idCanal = getIdCanal(user.getCanal());
+       String userId = getIdSubscriptor(user);
+       String updateQuery = "UPDATE t_suscriptores SET mailme = '"+mailme+"' WHERE t_suscriptores.idcanal = '"+idCanal+"' AND t_suscriptores.idsuscriptor ='"+userId+"'";
+       System.out.println("SET MAIL "+updateQuery);
          try 
       {
          //connect to DB 
          currentCon = ConnectionManager.getConnection();
          stmt=currentCon.createStatement();
+         r = stmt.executeUpdate(updateQuery);
+      }catch(Exception e){System.err.println(e);}
+         return r;
+   }
+   public static String getIdCanal(String nombreCanal){
+               //preparing some objects for connection 
+       Statement stmt = null;
+       String idCanal = "";
+       String searchQuery = "select id from t_canales where nombre='" + nombreCanal+ "'";
+        try 
+      {
+         //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
          rs = stmt.executeQuery(searchQuery);
-         String idUsuario = "";
-         if(rs.next()){
-             idUsuario = rs.getString("id_usuario");
-         }
-         rs = stmt.executeQuery(searchQuery2);
-         String idCanal = "";
          if(rs.next()){
              idCanal = rs.getString("id");
          }
-          System.out.println("Canalid = "+idCanal+" Usuario "+idUsuario);
-          String registerQuery = "DELETE FROM t_suscriptores WHERE idcanal = '"+idCanal+"' and idsuscriptor='"+idUsuario+"'";
-          System.out.println("SQL "+registerQuery);
+      }catch(Exception e){System.err.println(e);}
+       return idCanal;
+   }
+   public static String getIdSubscriptor(SuscriptorBean user){
+       //preparing some objects for connection 
+         Statement stmt = null;
+         String searchQuery = "select id_usuario from t_users where username='" + user.getSuscriptor()+ "'";
+         String idUsuario = "";
+         try {
+         //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+         rs = stmt.executeQuery(searchQuery);
+         if(rs.next()){
+             idUsuario = rs.getString("id_usuario");
+         }}catch(Exception e){System.err.println(e);}
+         System.out.println("idUsuario "+idUsuario);
+         return idUsuario;
+   }
+   public static boolean deletChannel(String channel){
+   //preparing some objects for connection 
+         Statement stmt = null;
+         boolean usuarioDesInscrito = false;
+         try {
+         //connect to DB 
+             //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+         String idCanal = getIdCanal(channel);
+          String deletQuery = "DELETE FROM t_canales WHERE id = '"+idCanal+"'";
+          System.out.println("Delet canal "+deletQuery);
              //register User
-             usuarioDesInscrito = true;
-             stmt.executeUpdate(registerQuery);
+             int r = stmt.executeUpdate(deletQuery);
+             if(r == 1){usuarioDesInscrito = true;}
       } 
       catch (Exception ex) 
       {
-         System.out.println("UnSubsribed fail: An Exception has occurred! " + ex);
+         System.out.println("UnSubscribed fail: An Exception has occurred! " + ex);
+      } 
+         return usuarioDesInscrito;
+   }
+   public static boolean deletAllsubscribers(String channel){
+    //preparing some objects for connection 
+         Statement stmt = null;
+         boolean usuarioDesInscrito = false;
+         try {
+         //connect to DB 
+             //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+         String idCanal = getIdCanal(channel);
+          System.out.println("Canalid = "+idCanal+" Usuario ");
+          String deletQuery = "DELETE FROM t_suscriptores WHERE idcanal = '"+idCanal+"'";
+          System.out.println("Delete All subscribers "+deletQuery);
+             //register User
+             int r = stmt.executeUpdate(deletQuery);
+             if(r == 1){usuarioDesInscrito = true;}
+      } 
+      catch (Exception ex) 
+      {
+         System.out.println("UnSubscribed fail: An Exception has occurred! " + ex);
+      } 
+         return usuarioDesInscrito;
+   }
+   public static boolean deletAllmesasages(String channel){
+      //preparing some objects for connection 
+         Statement stmt = null;
+         boolean usuarioDesInscrito = false;
+         try {
+         //connect to DB 
+             //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+         String idCanal = getIdCanal(channel);
+          System.out.println("Canalid = "+idCanal+" Usuario ");
+          String registerQuery = "DELETE FROM t_messages WHERE idchannel = '"+idCanal+"'";
+          System.out.println("Delete All messages "+registerQuery);
+             //register User
+             int r = stmt.executeUpdate(registerQuery);
+             if(r == 1){usuarioDesInscrito = true;}
+      } 
+      catch (Exception ex) 
+      {
+         System.out.println("UnSubscribed fail: An Exception has occurred! " + ex);
       } 
          return usuarioDesInscrito;
    }

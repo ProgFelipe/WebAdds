@@ -49,11 +49,11 @@ public class CanalCreator  extends HttpServlet{
             sus.SubscribeToChannel(autor, name);
             boolean register = CanalDAO.createCanal(canal);
                 if (register){  
-                  response.sendRedirect("myChannels.jsp"); //logged-in page      		
+                  response.sendRedirect("manager.jsp?place=MyChannels"); //logged-in page      		
                 }else{ 
                       request.setAttribute("message", "<div class=\"alert alert-danger alert-error\">\n" +
 "            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Creation Error!</strong> Check data and try again</div>");
-		getServletContext().getRequestDispatcher("/index.jsp").forward(
+		getServletContext().getRequestDispatcher("/manager.jsp?place=MyChannels").forward(
 				request, response);
                     }
         }

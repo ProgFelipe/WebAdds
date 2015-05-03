@@ -218,4 +218,8 @@ return bean;
             }
             return user;
         }
+        public static boolean UnRegister(UserBean bean ){
+            boolean unregister = false;
+            return unregister;
+        }
    }

@@ -49,9 +49,9 @@ public class AdFuente2  extends HttpServlet{
                 if (register){  
                   response.sendRedirect("InChannel.jsp?channel="+channel); //logged-in page      		
                 }else{ 
-                      request.setAttribute("message", "<div class=\"alert alert-danger alert-error\">\n" +
+                      request.setAttribute("pull", "<div class=\"alert alert-danger alert-error\">\n" +
 "            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Message Creation Error!</strong> Check data and try again</div>");
-		getServletContext().getRequestDispatcher("/InChannel.jsp").forward(
+		getServletContext().getRequestDispatcher("/InChannel.jsp?channel="+channel).forward(
 				request, response);
                     }
         }
