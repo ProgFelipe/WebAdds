@@ -29,7 +29,7 @@ public class SendEmail
                   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRUbenm7YNyQfZ9crz24bWhsjJwg_n28k4H46iDJh2igiyD9xp-2g", "Super email sender" );
       }
     // Assuming you are sending email from localhost
-      final static String host = "localhost:25";
+      final static String host = "localhost";
     public void getSubscribersAndSend(String author, String channel, String url, String text){
         //connect to DB 
         //preparing some objects for connection 
@@ -74,7 +74,11 @@ public class SendEmail
       // Get system properties
       Properties properties = System.getProperties();
       // Setup mail server
-      properties.setProperty("mail.smtp.host", host);
+      properties.put("mail.smtp.host", host);
+      properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		//props.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
       // Get the default Session object.
       Session session = Session.getDefaultInstance(properties);
       try{

@@ -45,6 +45,8 @@ public class CanalCreator  extends HttpServlet{
             canal.setDescripcion(description);
             canal.setAutor(autor);
             canal.setImageUrl(url);
+            Subscribe sus = new Subscribe();
+            sus.SubscribeToChannel(autor, name);
             boolean register = CanalDAO.createCanal(canal);
                 if (register){  
                   response.sendRedirect("myChannels.jsp"); //logged-in page      		

@@ -41,7 +41,7 @@ public class DeletSubscription  extends HttpServlet{
             user.setSuscriptor(suscriptor);
             boolean unsuscribe = CanalDAO.Unsubsribe(user);
                 if (unsuscribe){        
-                  response.sendRedirect("InChannel.jsp"); //logged-in page      		
+                  response.sendRedirect("manager.jsp?place=Suscriptions"); //logged-in page      		
                 }else{ 
                       request.setAttribute("message", "<div class=\"alert alert-danger alert-error\">\n" +
 "            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Register Error!</strong> Check data or Change user</div>");

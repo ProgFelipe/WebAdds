@@ -29,23 +29,26 @@ public class Subscribe extends HttpServlet{
         String autor = currentUser.getUsername().toString();
         if(channel.isEmpty()){
         request.setAttribute("message", "channel is empty");
-		getServletContext().getRequestDispatcher("/InChannel.jsp").forward(
+		getServletContext().getRequestDispatcher("/InChannel.jsp?channel=Art&subscribed=MyChannels").forward(
 				request, response);
         }else{
-            SuscriptorBean user = new SuscriptorBean();
-            user.setSuscriptor(autor);
-            user.setCanal(channel);
-            boolean register = CanalDAO.setSuscription(user);
+            boolean register = SubscribeToChannel(autor,  channel);
                 if (register){        
-                  request.setAttribute("message", "<div class=\"alert alert-success\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Yeah!</strong> You are now subscribed</div>");
-		getServletContext().getRequestDispatcher("/InChannel.jsp").forward(
+                  request.setAttribute("pull", "<div class=\"alert alert-success\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Yeah!</strong> You are now subscribed</div>");
+		getServletContext().getRequestDispatcher("/InChannel.jsp?channel="+channel+"&subscribed=Suscriptions").forward(
 				request, response);
                 }else{ 
-                      request.setAttribute("message", "<div class=\"alert alert-danger\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>"
+                      request.setAttribute("pull", "<div class=\"alert alert-danger\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>"
                               + "Erro!</strong> It was not possible to subscribe try again!</div>");
-		getServletContext().getRequestDispatcher("/InChannel.jsp").forward(
+		getServletContext().getRequestDispatcher("/InChannel.jsp?channel="+channel).forward(
 				request, response);
                     }
         }
-    }   
+    }
+     public boolean SubscribeToChannel(String autor, String channel){
+         SuscriptorBean user = new SuscriptorBean();
+            user.setSuscriptor(autor);
+            user.setCanal(channel);
+            return CanalDAO.setSuscription(user);
+     }
 }

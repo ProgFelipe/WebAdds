@@ -40,7 +40,7 @@ $.each(data, function(i,data)
     var fecha = data.fecha;
     var dateParts = fecha.split(' ');
     dateParts = dateParts[0].split('-');
-var msg_data="<li class=\"hvr-bounce-in\" onclick=\"location.href='InChannel.jsp?channel="+data.nombre+"'\" id='"+data.id+"'><time datetime="+dateParts[0]+"><span class='day'>"+dateParts[2]+"</span><span class='month'>"+dateParts[1]+"</span><span class='year'>"+dateParts[0]+"</span>\n\
+var msg_data="<li class=\"hvr-bounce-in\" onclick=\"location.href='InChannel.jsp?channel="+data.nombre+"&subscribed=<%=place%>'\" id='"+data.id+"'><time datetime="+dateParts[0]+"><span class='day'>"+dateParts[2]+"</span><span class='month'>"+dateParts[1]+"</span><span class='year'>"+dateParts[0]+"</span>\n\
 <span class='time'>ALL DAY</span></time>\n\
 <img alt='Independence Day' src='"+data.url+"' /><div class='info'>\n\
 <h2 class='title'>"+data.nombre+"</h2>\n\

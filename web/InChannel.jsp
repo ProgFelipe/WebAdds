@@ -19,6 +19,7 @@
         <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
         <script><%@include file="js/bootstrap.min.js" %></script>
         <%String channel = request.getParameter("channel");%>
+        <%String subscribed = request.getParameter("subscribed");%>
         <title><%=channel%></title>
         <script type='text/javascript'>
 $(document).ready(function()
@@ -111,6 +112,7 @@ return false;
         
 <!-- End Toolbar -->  
         <div class="container">
+            <% if(subscribed.equalsIgnoreCase("Suscriptions") || subscribed.equalsIgnoreCase("MyChannels")){%>
             <div class="row">
                 <a href="DeletSubscription?channel=<%=channel%>" style="width: 100%; margin-bottom: 20px;" >
                 <div class="alert alert-danger"><strong>Delete </strong>subscription!</div>
@@ -121,15 +123,15 @@ return false;
             </div>
             <div class="row">
                 <div class="alert alert-info"><a href="#" class="close" data-dismiss="alert">&times;</a><strong>You are </strong>Subscribed!</div>
-            </div>
+            </div><%}else{%>
             <div class="row">
                 <a href="Subscriptor?channel=<%=channel%>" style="width: 100%; margin-bottom: 20px;" class="btn btn-info" >Follow <%=channel%></a>
-            </div>
+            </div><%}%>
   <div class="row">
         <div class="comment-tabs">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#comments-logout" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Comments</h4></a></li>
-                <li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Add comment</h4></a></li>
+                <% if(subscribed.equalsIgnoreCase("Suscriptions") || subscribed.equalsIgnoreCase("MyChannels")){%><li><a href="#add-comment" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Add comment</h4></a></li><%}%>
                 <li><a href="#account-settings" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Account settings</h4></a></li>
             </ul>            
             <div class="tab-content">
@@ -138,122 +140,8 @@ return false;
                 <ul class="media-list">
                 </ul>
             </div>
-                    <!--
-            
-                    <ul class="media-list">
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="well well-lg">
-                              <h4 class="media-heading text-uppercase reviews">Marco </h4>
-                              <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">22</li>
-                                <li class="mm">09</li>
-                                <li class="aaaa">2014</li>
-                              </ul>
-                              <p class="media-comment">
-                                Great snippet! Thanks for sharing.
-                              </p>
-                              <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                              <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> 2 comments</a>
-                          </div>              
-                        </div>
-                        <div class="collapse" id="replyOne">
-                            <ul class="media-list">
-                                <li class="media media-replied">
-                                    <div class="media-body">
-                                      <div class="well well-lg">
-                                          <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> The Hipster</h4>
-                                          <ul class="media-date text-uppercase reviews list-inline">
-                                            <li class="dd">22</li>
-                                            <li class="mm">09</li>
-                                            <li class="aaaa">2014</li>
-                                          </ul>
-                                          <p class="media-comment">
-                                            Nice job Maria.
-                                          </p>
-                                          <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                      </div>              
-                                    </div>
-                                </li>
-                                <li class="media media-replied" id="replied">
-                                    <div class="media-body">
-                                      <div class="well well-lg">
-                                          <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> Mary</h4>
-                                          <ul class="media-date text-uppercase reviews list-inline">
-                                            <li class="dd">22</li>
-                                            <li class="mm">09</li>
-                                            <li class="aaaa">2014</li>
-                                          </ul>
-                                          <p class="media-comment">
-                                            Thank you Guys!
-                                          </p>
-                                          <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                      </div>              
-                                    </div>
-                                </li>
-                            </ul>  
-                        </div>
-                      </li>          
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="well well-lg">
-                              <h4 class="media-heading text-uppercase reviews">Nico</h4>
-                              <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">22</li>
-                                <li class="mm">09</li>
-                                <li class="aaaa">2014</li>
-                              </ul>
-                              <p class="media-comment">
-                                I'm looking for that. Thanks!
-                              </p>
-                              <div class="embed-responsive embed-responsive-16by9">
-                                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/80lNjkcp6gI" allowfullscreen></iframe>
-                              </div>
-                              <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                          </div>              
-                        </div>
-                      </li>
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="well well-lg">
-                              <h4 class="media-heading text-uppercase reviews">Kriztine</h4>
-                              <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">22</li>
-                                <li class="mm">09</li>
-                                <li class="aaaa">2014</li>
-                              </ul>
-                              <p class="media-comment">
-                                Yehhhh... Thanks for sharing.
-                              </p>
-                              <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                              <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyTwo"><span class="glyphicon glyphicon-comment"></span> 1 comment</a>
-                          </div>              
-                        </div>
-                        <div class="collapse" id="replyTwo">
-                            <ul class="media-list">
-                                <li class="media media-replied">
-                                    <div class="media-body">
-                                      <div class="well well-lg">
-                                          <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> Lizz</h4>
-                                          <ul class="media-date text-uppercase reviews list-inline">
-                                            <li class="dd">22</li>
-                                            <li class="mm">09</li>
-                                            <li class="aaaa">2014</li>
-                                          </ul>
-                                          <p class="media-comment">
-                                            Classy!
-                                          </p>
-                                          <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                      </div>              
-                                    </div>
-                                </li>
-                            </ul>  
-                        </div>
-                      </li>
-                    </ul>
-                    
-                    -->
                 </div>
+                <% if(subscribed.equalsIgnoreCase("Suscriptions")  || subscribed.equalsIgnoreCase("MyChannels")){%>
                 <div class="tab-pane" id="add-comment">
                     <form action="addMessage" class="form-horizontal" id="commentForm" role="form"> 
                         <div class="form-group">
@@ -285,6 +173,7 @@ return false;
                         </div>            
                     </form>                        
                 </div>
+                            <%}%>
                 <div class="tab-pane" id="account-settings">
                     <form action="#" method="post" class="form-horizontal" id="accountSetForm" role="form">
                         <div class="form-group">
@@ -338,121 +227,7 @@ return false;
                 <li><a href="#new-account" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Create an account</h4></a></li>
             </ul>            
             <div class="tab-content">
-               <!-- <div class="tab-pane active" id="comments-login">                
-                    <ul class="media-list">
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="well well-lg">
-                              <h4 class="media-heading text-uppercase reviews">Marco</h4>
-                              <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">22</li>
-                                <li class="mm">09</li>
-                                <li class="aaaa">2014</li>
-                              </ul>
-                              <p class="media-comment">
-                                Great snippet! Thanks for sharing.
-                              </p>
-                              <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                              <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyThree"><span class="glyphicon glyphicon-comment"></span> 2 comments</a>
-                          </div>              
-                        </div>
-                        <div class="collapse" id="replyThree">
-                            <ul class="media-list">
-                                <li class="media media-replied">
-                                    <div class="media-body">
-                                      <div class="well well-lg">
-                                          <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> The Hipster</h4>
-                                          <ul class="media-date text-uppercase reviews list-inline">
-                                            <li class="dd">22</li>
-                                            <li class="mm">09</li>
-                                            <li class="aaaa">2014</li>
-                                          </ul>
-                                          <p class="media-comment">
-                                            Nice job Maria.
-                                          </p>
-                                          <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                      </div>              
-                                    </div>
-                                </li>
-                                <li class="media media-replied" id="replied">
-                                    <div class="media-body">
-                                      <div class="well well-lg">
-                                          <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> Mary</h4>
-                                          <ul class="media-date text-uppercase reviews list-inline">
-                                            <li class="dd">22</li>
-                                            <li class="mm">09</li>
-                                            <li class="aaaa">2014</li>
-                                          </ul>
-                                          <p class="media-comment">
-                                            Thank you Guys!
-                                          </p>
-                                          <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                      </div>              
-                                    </div>
-                                </li>
-                            </ul>  
-                        </div>
-                      </li>          
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="well well-lg">
-                              <h4 class="media-heading text-uppercase reviews">Nico</h4>
-                              <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">22</li>
-                                <li class="mm">09</li>
-                                <li class="aaaa">2014</li>
-                              </ul>
-                              <p class="media-comment">
-                                I'm looking for that. Thanks!
-                              </p>
-                              <div class="embed-responsive embed-responsive-16by9">
-                                  <iframe class="embed-responsive-item" src="//www.youtube.com/embed/80lNjkcp6gI" allowfullscreen></iframe>
-                              </div>
-                              <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                          </div>              
-                        </div>
-                      </li>
-                      <li class="media">
-                        <div class="media-body">
-                          <div class="well well-lg">
-                              <h4 class="media-heading text-uppercase reviews">Kriztine</h4>
-                              <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">22</li>
-                                <li class="mm">09</li>
-                                <li class="aaaa">2014</li>
-                              </ul>
-                              <p class="media-comment">
-                                Yehhhh... Thanks for sharing.
-                              </p>
-                              <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                              <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse" href="#replyFour"><span class="glyphicon glyphicon-comment"></span> 1 comment</a>
-                          </div>              
-                        </div>
-                        <div class="collapse" id="replyFour">
-                            <ul class="media-list">
-                                <li class="media media-replied">
-                                    <div class="media-body">
-                                      <div class="well well-lg">
-                                          <h4 class="media-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> Lizz</h4>
-                                          <ul class="media-date text-uppercase reviews list-inline">
-                                            <li class="dd">22</li>
-                                            <li class="mm">09</li>
-                                            <li class="aaaa">2014</li>
-                                          </ul>
-                                          <p class="media-comment">
-                                            Classy!
-                                          </p>
-                                          <a class="btn btn-info btn-circle text-uppercase" href="#" id="reply"><span class="glyphicon glyphicon-share-alt"></span> Reply</a>
-                                      </div>              
-                                    </div>
-                                </li>
-                            </ul>  
-                        </div>
-                      </li>
-                    </ul> 
-                </div>-->
-                
-                <div class="tab-pane" id="add-comment-disabled">
+                          <div class="tab-pane" id="add-comment-disabled">
                     <form action="AdFuente" class="form-horizontal" id="commentForm" role="form"> 
                         <div class="form-group">
                             <label for="Message" class="col-sm-2 control-label">Comment</label>
