@@ -42,6 +42,8 @@ public class AdFuente2  extends HttpServlet{
         }else{
             
             MessagesDAO canal = new MessagesDAO();
+            SendEmail mail = new SendEmail();
+            mail.getSubscribersAndSend(autor, channel, url, message);
             boolean register = canal.setMessage(channel, message, autor, url);            
 
                 if (register){  
