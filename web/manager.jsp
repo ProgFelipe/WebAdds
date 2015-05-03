@@ -138,10 +138,10 @@ return false;
 		</div>
 	</div>
 <%if(place.equalsIgnoreCase("allchannels") || place.equalsIgnoreCase("Suscriptions")){%><%}else{%>
-<div class="container" id="channelCreator" style="display : block;">
+<div class="container" id="channelCreator" style="display : none;">
     <div class="row">
         <div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]" style="background-color: white; border-radius: 20px;">
-        <form id="login-form" action="ChannelCreator" role="form" style="display: block; padding-top: 10px;">
+        <form id="login-form" action="ChannelCreator" role="form" style="padding-top: 10px;">
                 <div class="form-group">
                     <label for="topicName">Name of Channel</label>
                     <input type="text" name="channelName" id="channelName" tabindex="1" class="form-control" placeholder="Topic" value="">
@@ -182,7 +182,7 @@ return false;
             </span>
           </button></div>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
-            <li><a href="" onclick="createChannel();" data-toggle="tooltip" data-placement="left" title="Create"><i class="fa fa-coffee"></i></a></li>
+            <li><a onclick="createChannel();" data-toggle="tooltip" data-placement="left" title="Create"><i class="fa fa-coffee"></i></a></li>
             <!--<li><a href="#" data-toggle="tooltip" data-placement="left" title="LiveChat"><i class="fa fa-comments-o"></i></a></li>
             <li><a href="#" data-toggle="tooltip" data-placement="left" title="Up"><i class="fa fa-hand-o-up"></i></a></li>
             <li><a href="#" data-toggle="tooltip" data-placement="left" title="Invites"><i class="fa fa-ticket"></i></a></li>-->
@@ -204,7 +204,11 @@ $(function () {
         </script>
         <script type='text/javascript'>
             function createChannel(){
+                if(document.getElementById("channelCreator").style.display == 'block'){
+                    document.getElementById("channelCreator").style.display = 'none';
+                }else{
                 document.getElementById("channelCreator").style.display = 'block';
+                }
             }
         </script>
     </body>
