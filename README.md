@@ -11,8 +11,13 @@ http://activemq.apache.org/
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/main.PNG)
 #### Channel creator
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/channelCreator.PNG)
-#### In Subscribed Channel comment
+#### In Channel Comments
+![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/comments.PNG)
+#### In Channel AddComment
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/InChannel.PNG)
+#### In Channel AccountSettings
+![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/account.PNG)
+
 
 ###The data Base is on:
 https://github.com/ProgFelipe/WebAdds/tree/master/database
