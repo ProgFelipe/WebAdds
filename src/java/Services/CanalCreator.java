@@ -45,9 +45,10 @@ public class CanalCreator  extends HttpServlet{
             canal.setDescripcion(description);
             canal.setAutor(autor);
             canal.setImageUrl(url);
-            Subscribe sus = new Subscribe();
-            sus.SubscribeToChannel(autor, name);
+
             boolean register = CanalDAO.createCanal(canal);
+                Subscribe sus = new Subscribe();
+                sus.SubscribeToChannel(autor, name);
                 if (register){  
                   response.sendRedirect("manager.jsp?place=MyChannels"); //logged-in page      		
                 }else{ 
@@ -58,10 +59,5 @@ public class CanalCreator  extends HttpServlet{
                     }
         }
     }
-    /*
-    public void changeName(String newName){}
-    public void changeDescription(String newDescription){}
-    public void delet(){}
-    */
     
 }
