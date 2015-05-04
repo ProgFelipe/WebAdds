@@ -15,6 +15,9 @@ http://activemq.apache.org/
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/comments.PNG)
 #### In Channel AddComment
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/InChannel.PNG)
+#### When user adds a comment all subscribers users that have in their config: email Request
+####will get an email
+![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/emailSend.PNG)
 #### In Channel AccountSettings
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/account.PNG)
 
