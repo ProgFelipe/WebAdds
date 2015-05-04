@@ -167,6 +167,13 @@ return false;
                                    class="form-control" placeholder="channelName" value="<%=channel%>">
                             </div>
                         </div>
+                        <div class="form-group" style="visibility: hidden;">
+                            <label for="type" class="col-sm-2 control-label">User Type</label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly name="type" id="type" tabindex="1" 
+                                   class="form-control" placeholder="type" value="<%=subscribed%>">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="url" class="col-sm-2 control-label">Upload media</label>
                             <div class="col-sm-10">                    
@@ -202,87 +209,8 @@ return false;
                 </div>
             </div>
         </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" id="login">
-        <div class="page-header">
-            <h3 class="reviews">Leave your comment</h3>
-            <div class="logout">
-                <button class="btn btn-default btn-circle text-uppercase" type="button" onclick="$('#login').hide(); $('#logout').show()">
-                    <span class="glyphicon glyphicon-off"></span> Login                    
-                </button>                
-            </div>
-        </div>
-        <div class="comment-tabs">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="active"><a href="#comments-login" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Comments</h4></a></li>
-                <li><a href="#add-comment-disabled" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Add comment</h4></a></li>
-                <li><a href="#new-account" role="tab" data-toggle="tab"><h4 class="reviews text-capitalize">Create an account</h4></a></li>
-            </ul>            
-            <div class="tab-content">
-                          <div class="tab-pane" id="add-comment-disabled">
-                    <form action="AdFuente" class="form-horizontal" id="commentForm" role="form"> 
-                        <div class="form-group">
-                            <label for="Message" class="col-sm-2 control-label">Comment</label>
-                            <div class="col-sm-10">
-                              <textarea class="form-control" name="Message" id="addComment" rows="5" ></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="url" class="col-sm-2 control-label">Upload media</label>
-                            <div class="col-sm-10">                    
-                                <div class="input-group">
-                                  <div class="input-group-addon">http://</div>
-                                  <input type="text" class="form-control" name="url" id="uploadMedia" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">                    
-                                <button class="btn btn-success btn-circle text-uppercase disabled" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Summit comment</button>
-                            </div>
-                        </div>            
-                    </form>
-                </div>
-                
-                <div class="tab-pane" id="new-account">
-                    <form action="#" method="post" class="form-horizontal" id="commentForm" role="form">
-                        <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" name="name" id="name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-sm-2 control-label">Email</label>
-                            <div class="col-sm-10">
-                              <input type="email" class="form-control" name="email" id="email" required>
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="password" class="col-sm-2 control-label">Password</label>
-                            <div class="col-sm-10">
-                              <input type="password" class="form-control" name="password" id="password">
-                            </div>
-                        </div>                         
-                        <div class="form-group">
-                            <div class="checkbox">                
-                                <label for="agreeTerms" class="col-sm-offset-2 col-sm-10">
-                                    <input type="checkbox" name="agreeTerms" id="agreeTerms"> I agree all <a href="#">Terms & Conditions</a>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">                    
-                                <button class="btn btn-primary btn-circle text-uppercase" type="submit" id="submit">Create an account</button>
-                            </div>
-                        </div>            
-                    </form>
-                </div>
-            </div>
-        </div>
+       </div>
     </div>
-  </div>
 </div>
-    </body>
+</body>
 </html>

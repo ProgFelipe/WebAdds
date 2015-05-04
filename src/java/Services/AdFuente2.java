@@ -31,6 +31,8 @@ public class AdFuente2  extends HttpServlet{
         String channel = request.getParameter("channelName");
         String message = request.getParameter("Message");
         String url = request.getParameter("url");
+        //is channel creator or subscriber
+        String type = request.getParameter("type");
         HttpSession s=request.getSession();
                 UserBean currentUser = (UserBean) (s.getAttribute("currentSessionUser"));
         String autor = currentUser.getUsername().toString();
@@ -47,11 +49,11 @@ public class AdFuente2  extends HttpServlet{
             boolean register = canal.setMessage(channel, message, autor, url);            
 
                 if (register){  
-                  response.sendRedirect("InChannel.jsp?channel="+channel); //logged-in page      		
+                  response.sendRedirect("InChannel.jsp?channel="+channel+"&subscribed="+type); //logged-in page      		
                 }else{ 
                       request.setAttribute("pull", "<div class=\"alert alert-danger alert-error\">\n" +
 "            <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Message Creation Error!</strong> Check data and try again</div>");
-		getServletContext().getRequestDispatcher("/InChannel.jsp?channel="+channel).forward(
+		getServletContext().getRequestDispatcher("/InChannel.jsp?channel="+channel+"&subscribed="+type).forward(
 				request, response);
                     }
         }
