@@ -50,7 +50,9 @@ var msg_data="<li class='media'><div class='media-body'><div class='well well-lg
     "</li><li class='mm'>"+dateParts[1]+"</li>\n\
     <li class='aaaa'>"+dateParts[0]+"</li></ul>\n\
 <p class='media-comment'>"+data.message+"</p>\n\
-<img style='width: 300px; height: auto;' src='"+data.urlMedia+"'/></div></div></li>";
+<img style='width: 300px; height: auto;' src='"+data.urlMedia+"'/>\n\
+<a class='btn btn-default glyphicon glyphicon-hand-up' href='deletMessage?id="+data.idMessage+"'>Delet Message</a>\n\
+</div></div></li>";
 $(msg_data).appendTo(".media-list");
 });
 }

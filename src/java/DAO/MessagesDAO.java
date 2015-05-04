@@ -100,7 +100,45 @@ public class MessagesDAO {
           }
           return canales;
     }
-    public void deleteMessage(String idUsuario, String idMessage){
-    
+    public static boolean deletMessage(String idMessage, String idAuthor){
+    //preparing some objects for connection 
+         Statement stmt = null;
+         boolean deletedMessage = false;
+         if(isAuthor(idMessage, idAuthor)){
+         try {
+         //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+          String deletQuery = "DELETE FROM t_messages WHERE idMessage = '"+idMessage+"'";
+          System.out.println("Delet message "+deletQuery);
+             //register User
+             int r = stmt.executeUpdate(deletQuery);
+             if(r == 1){deletedMessage = true;}
+      } 
+      catch (Exception ex) 
+      {
+         System.out.println("deletMessage fail: An Exception has occurred! " + ex);
+      } }
+         return deletedMessage;
+    }
+    public static boolean isAuthor(String idMessage, String idAuthor){
+       //preparing some objects for connection 
+         Statement stmt = null;
+         boolean Author = false;
+         try {
+         //connect to DB 
+         currentCon = ConnectionManager.getConnection();
+         stmt=currentCon.createStatement();
+          String deletQuery = "select * FROM t_messages WHERE idMessage = '"+idMessage+"' AND idauthor = '"+idAuthor+"'";
+          System.out.println("isAuthor message "+deletQuery);
+             //register User
+             ResultSet r = stmt.executeQuery(deletQuery);
+             if(r.next()){Author = true;}
+      } 
+      catch (Exception ex) 
+      {
+         System.out.println("isAuthor fail: An Exception has occurred! " + ex);
+      } 
+         return Author; 
     }
 }
