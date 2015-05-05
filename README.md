@@ -2,8 +2,17 @@
 This project is a Responisve web application using Boostrap.
 Is an Adds aplication writen in java that uses MomActiveMq, Mysql and RESTful interactions.
 http://activemq.apache.org/
-#### Log In
+#Install
+0. Add the database addsdb.sql using phpmyadmin import option.
+1. Clean and Build.
+You will notice in the WebAdds/dist/WebAdds.war
+2. In your GlassFish server add the WebAdds.war
+3. Open the direction given by GlassFish
+Note: 
+This projec was created using NetBeans IDE 8.0.1.
 
+
+#### Log In
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/LogIn.PNG)
 #### Register
 ![alt tag](https://raw.githubusercontent.com/ProgFelipe/WebAdds/master/examples/Register.PNG)
