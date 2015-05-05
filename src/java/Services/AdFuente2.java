@@ -39,7 +39,7 @@ public class AdFuente2  extends HttpServlet{
         System.out.println("Autor "+autor);
         if(message.isEmpty() || autor.isEmpty() || channel.isEmpty()){
         request.setAttribute("message", "some data is empty!");
-		getServletContext().getRequestDispatcher("/InChannel.jsp").forward(
+		getServletContext().getRequestDispatcher("/manager.jsp?place=MyChannels").forward(
 				request, response);
         }else{
             

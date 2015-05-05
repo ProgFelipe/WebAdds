@@ -34,9 +34,9 @@ public class CanalCreator  extends HttpServlet{
                 UserBean currentUser = (UserBean) (s.getAttribute("currentSessionUser"));
         String autor = currentUser.getUsername().toString();
         System.out.println("Autor "+autor);
-        if(name.isEmpty() || description.isEmpty() || autor.isEmpty() || url.isEmpty()){
+        if(name == null || description == null || autor == null || url == null){
         request.setAttribute("message", "some data is empty!");
-		getServletContext().getRequestDispatcher("/myChannels.jsp").forward(
+		getServletContext().getRequestDispatcher("manager.jsp?place=MyChannels").forward(
 				request, response);
         }else{
             
