@@ -25,8 +25,8 @@ public class SendEmail
       static Connection currentCon = null;
       static ResultSet rs = null;  
 
-    private static String USER_NAME = "felipegi91";  // GMail user name (just the part before "@gmail.com")
-    private static String PASSWORD = "*%&%"; // GMail password
+    private static String USER_NAME = "webbadds@gmail.com";  // GMail user name (just the part before "@gmail.com")
+    private static String PASSWORD = "webadds2015"; // GMail password
        
       
       /*public static void main(String args[]){
